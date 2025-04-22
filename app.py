@@ -22,8 +22,6 @@ if st.sidebar.button("Search Symbol"):
         results = search(company_name)
         if "quotes" in results and results["quotes"]:
             st.sidebar.write("### Matching Stocks:")
-            for stock in results["quotes"]:
-                st.sidebar.write(f"- **{stock['shortname']}** → `{stock['symbol']}`")
         else:
             st.sidebar.warning("No results found. Try a different name.")
     else:
@@ -46,7 +44,7 @@ else:
     st.sidebar.error("Highly Sensitive: Best for rapid market changes but may overfit.")
 
 forecast_periods = st.sidebar.slider("Forecast Periods (days)", 1, 365, 90)
-log_to_mlflow = st.sidebar.checkbox("Log Model to MLflow")  # ✅ Checkbox for MLflow
+log_to_mlflow = st.sidebar.checkbox("Log Model to MLflow")  # Checkbox for MLflow
 st.sidebar.write("by Raj Jangam.")
 
 # Fetch Stock Data Button
