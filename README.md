@@ -57,7 +57,7 @@ Other Utility Libraries : **uvicorn**, **matplotlib**, **numpy**.
 4.   Clone this Repository :
 
    ```
-   git clone https://github.com/Rajcr2/FRA.git
+   git clone https://github.com/RJgit18/FRAsst.git
    ```
 5.   Now, Install all mentioned required libraries in your environment.
 6.   Start Backend server first now with command.
