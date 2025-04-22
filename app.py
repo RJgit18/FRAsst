@@ -20,7 +20,7 @@ company_name = st.sidebar.text_input("Enter Company Name", "")
 if st.sidebar.button("Search Symbol"):
     if company_name.strip():
         results = search(company_name)
-        if "quotes" in results and results["quotes"]:
+        if "name" in results and results["name"]:
             st.sidebar.write("### Matching Stocks:")
         else:
             st.sidebar.warning("No results found. Try a different name.")
