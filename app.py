@@ -5,15 +5,10 @@ from yahooquery import search
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-# Set Streamlit page configuration
 st.set_page_config(page_title="Financial Research Assistant", layout="wide")
-
-# Section 2: Stock Analysis & Forecasting
 st.title("Financial Research Assistant")
-
 stock_symbol = st.text_input("Enter Stock Symbol (e.g., TCS.NS, RELIANCE.NS)")
 
-# Section 1: Yahoo Query to Search for Ticker Symbol
 st.sidebar.title("Find Stock Symbol")
 company_name = st.sidebar.text_input("Enter Company Name", "")
 
@@ -30,10 +25,8 @@ if st.sidebar.button("Search Symbol"):
 # FastAPI Backend URLs
 backend_url = "http://127.0.0.1:8000/analyze/"
 
-# Sidebar: Changepoint Prior Scale and Forecast Periods
 changepoint_scale = st.sidebar.slider("Changepoint Prior Scale", 0.01, 0.5, 0.22, 0.01)
 
-# Dynamic Tooltip Messages based on Changepoint Scale
 if changepoint_scale <= 0.05:
     st.sidebar.info("Stable Forecast: Limited trend flexibility, best for smooth time series.")
 elif 0.06 <= changepoint_scale <= 0.15:
@@ -88,7 +81,6 @@ if st.button("Analyze Stock"):
             start_date = forecast_df["ds"].iloc[int(len(forecast_df) * 0.3)]  # 30% past
             end_date = forecast_df["ds"].max()  # Future limit
 
-            # Plot Forecast Data using Matplotlib
             fig, ax = plt.subplots(figsize=(10, 5))
             ax.plot(forecast_df["ds"], forecast_df["yhat"], label="Predicted", color="blue")
             ax.fill_between(
@@ -107,12 +99,10 @@ if st.button("Analyze Stock"):
             ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))  # Format dates correctly
             plt.xticks(rotation=30, ha="right")  # Rotate x-axis labels properly
 
-            # **SET X-AXIS RANGE TO SHOW 30% PAST, 70% FUTURE**
             ax.set_xlim([start_date, end_date])
 
             st.pyplot(fig)
 
-            ### **📈 Streamlit Interactive Chart (Only 'yhat' vs 'ds')**
             st.write("### Interactive Stock Price Forecast")
             st.line_chart(forecast_df.set_index("ds")[["yhat","yhat_lower"]])
 
